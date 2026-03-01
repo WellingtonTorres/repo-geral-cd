@@ -24,6 +24,7 @@ sExibeElemMatriz = ""
 matriz = [[0] * nColunas for _ in range(nLinhas)]
 lSuperior = True
 lInferior = True
+elemento = ""
 
 
 #apenas verifico
@@ -49,11 +50,27 @@ elif lInferior and not lSuperior:
 else:
     print(f'Não é uma matriz triangular!')
     
-    
-for i in range(len(matriz)):
-    print(matriz[i])
-    # for j in range(len(matriz[i])):
-        
+if lSuperior or lInferior:    
+    for i in range(len(matriz)):
+        for j in range(len(matriz[i])):
+            elemento = str(matriz[i][j])
+            if i > j: #avaliando inferior
+                if matriz[i][j] > 0:
+                    if lInferior:
+                        print("\033[1;32;40m| " + " ".join(f'{elemento:2}') + " |", end=" " )
+                    else:
+                        print("| " + " ".join(f'{elemento:2}') + " |", end=" " )
+            elif i < j: #avaliando superior
+                if lSuperior:
+                     print("\033[1;32;40m| " + " ".join(f'{elemento:2}') + " |", end=" " )
+                else:
+                    print("| " + " ".join(f'{elemento:2}') + " |", end=" " )
+            else:
+                print("\033[1m| " + " ".join(f'{elemento:2}') + " |", end=" " )
+            
+            if len(matriz[i]) == (j + 1):
+                print('\n')
+            
         
 
 #     for j in range(nColunas):
