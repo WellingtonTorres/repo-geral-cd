@@ -5,7 +5,6 @@
 #  - Matriz A
 #  - Matriz A Superior
 #  - Matriz B Inferior
-# QUESTIONAR A PROFESSORA SOBRE A45, POIS NAO HA MATRIZ TRIANGULAR REAL SE NAO FOR QUADRATICA
 
 #Digite os elementos da Matriz A45:
 
@@ -15,65 +14,39 @@ def subscrito(num):
     sub = "₀₁₂₃₄₅₆₇₈₉"
     return num.translate(str.maketrans(sequencia, sub))
 
-print('Digite os elementos da Matriz Triangular A₄₅:')
+def exibir_matriz(nome, mat):
+    print(f'\n{nome}:')
+    for linha in mat:
+        print('| ' + '  '.join(f'{v:3}' for v in linha) + ' |')
 
-nLinhas = 3
-nColunas = 3
-sExibeElemMatriz = ""
-# matriz = [[0] * nColunas] * nLinhas # dessa forma cria referência da lista na mesma lista
+print('Digite os elementos da Matriz A₄₅:')
+
+nLinhas = 4
+nColunas = 5
 matriz = [[0] * nColunas for _ in range(nLinhas)]
-lSuperior = True
-lInferior = True
-elemento = ""
 
-
-#apenas verifico
-print(matriz)
-
-for i in range(len(matriz)):
-    for j in range(len(matriz[i])):
-        sExibeElemMatriz = str(i + 1) + str(j + 1)
-        sExibeElemMatriz = subscrito(sExibeElemMatriz)
+for i in range(nLinhas):
+    for j in range(nColunas):
+        sExibeElemMatriz = subscrito(str(i + 1) + str(j + 1))
         matriz[i][j] = int(input(f'A{sExibeElemMatriz}: '))
-        if i > j: #avaliando inferior
-            if matriz[i][j] > 0:
-                lInferior = False
-        if i < j: #avaliando superior
-            if matriz[i][j] > 0:
-                lSuperior = False
 
+# Exibe Matriz A
+exibir_matriz('Matriz A', matriz)
 
-if lSuperior and not lInferior:
-    print(f'É uma matriz triangular superior!')
-elif lInferior and not lSuperior:
-    print(f'É uma matriz triangular inferior!')
-else:
-    print(f'Não é uma matriz triangular!')
-    
-if lSuperior or lInferior:    
-    for i in range(len(matriz)):
-        for j in range(len(matriz[i])):
-            elemento = str(matriz[i][j])
-            if i > j: #avaliando inferior
-                if matriz[i][j] > 0:
-                    if lInferior:
-                        print("\033[1;32;40m| " + " ".join(f'{elemento:2}') + " |", end=" " )
-                    else:
-                        print("| " + " ".join(f'{elemento:2}') + " |", end=" " )
-            elif i < j: #avaliando superior
-                if lSuperior:
-                     print("\033[1;32;40m| " + " ".join(f'{elemento:2}') + " |", end=" " )
-                else:
-                    print("| " + " ".join(f'{elemento:2}') + " |", end=" " )
-            else:
-                print("\033[1m| " + " ".join(f'{elemento:2}') + " |", end=" " )
-            
-            if len(matriz[i]) == (j + 1):
-                print('\n')
-            
-        
+# Monta Matriz A Superior (zeros abaixo da diagonal)
+matSuperior = [[0] * nColunas for _ in range(nLinhas)]
+for i in range(nLinhas):
+    for j in range(nColunas):
+        if i <= j:
+            matSuperior[i][j] = matriz[i][j]
 
-#     for j in range(nColunas):
+exibir_matriz('Matriz A Superior', matSuperior)
 
+# Monta Matriz B Inferior (zeros acima da diagonal)
+matInferior = [[0] * nColunas for _ in range(nLinhas)]
+for i in range(nLinhas):
+    for j in range(nColunas):
+        if i >= j:
+            matInferior[i][j] = matriz[i][j]
 
-# print("matriz A" + subscrito(45)) 
+exibir_matriz('Matriz B Inferior', matInferior)
