@@ -6,8 +6,6 @@
 #  - Matriz A Superior
 #  - Matriz B Inferior
 
-#Digite os elementos da Matriz A45:
-
 #func para maior legibilidade do output
 def subscrito(num):
     sequencia = "0123456789"
