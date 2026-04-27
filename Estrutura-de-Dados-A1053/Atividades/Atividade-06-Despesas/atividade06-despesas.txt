@@ -1,0 +1,1 @@
+https://colab.research.google.com/github/WellingtonTorres/repo-geral-cd/blob/main/Estrutura-de-Dados-A1053/Atividades/Atividade-06-Despesas/atividade06-despesas.ipynb
